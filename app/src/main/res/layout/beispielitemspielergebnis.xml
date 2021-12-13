@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="69dp"
+    android:layout_marginBottom="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp">
+
+        <TextView
+            android:id="@+id/Heimmannschaft"
+            android:layout_width="155dp"
+            android:layout_height="69dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:textSize="6pt" />
+
+
+
+        <ImageView
+            android:id="@+id/LogoHeimmannschaft"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/Heimmannschaft" />
+
+        <TextView
+            android:id="@+id/Spielergebnis"
+            android:layout_width="35dp"
+            android:layout_height="69dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/LogoHeimmannschaft"
+            android:textSize="6pt"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/LogoGastmannschaft"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/Spielergebnis" />
+
+        <TextView
+            android:id="@+id/Gastmannschaft"
+            android:layout_width="155dp"
+            android:layout_height="69dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/LogoGastmannschaft"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:textSize="6pt" />
+
+
+    </RelativeLayout>
+        
+</androidx.cardview.widget.CardView>
