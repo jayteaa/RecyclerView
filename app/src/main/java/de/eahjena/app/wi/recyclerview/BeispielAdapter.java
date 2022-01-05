@@ -1,8 +1,7 @@
 package de.eahjena.app.wi.recyclerview;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +9,118 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+
+
+public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.ExampleViewHolder> {
+
+    private Context context;
+    private List<beispielitemspielergebnis> ergebnisListe;
+
+    public BeispielAdapter(Context context , List<beispielitemspielergebnis> ergebnisse){
+
+        this.context = context;
+        ergebnisListe = ergebnisse;
+    }
+
+    @NonNull
+    @Override
+    public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.beispielitemspielergebnis , parent , false);
+        return new ExampleViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
+
+        beispielitemspielergebnis beispielitemspielergebnis = ergebnisListe.get(position);
+        holder.Heimmannschaft.setText(beispielitemspielergebnis.getHeimmannschaft());
+        holder.Gastmannschaft.setText(beispielitemspielergebnis.getGastmannschaft());
+        holder.Endergebnis.setText(beispielitemspielergebnis.getEndergebnis());
+        Glide.with(context).load(beispielitemspielergebnis.getLogoHeim()).into(holder.LogoHeimmannschaft);
+        Glide.with(context).load(beispielitemspielergebnis.getLogoGast()).into(holder.LogoGastmannschaft);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return ergebnisListe.size();
+    }
+
+
+
+    public class ExampleViewHolder extends RecyclerView.ViewHolder{
+
+
+        public TextView Heimmannschaft;
+        public TextView Gastmannschaft;
+        public TextView Endergebnis;
+        public ImageView LogoHeimmannschaft;
+        public ImageView LogoGastmannschaft;
+
+
+
+        public ExampleViewHolder(@NonNull View itemView) {
+
+            super(itemView);
+
+            Heimmannschaft = itemView.findViewById(R.id.Heimmannschaft);
+            Gastmannschaft = itemView.findViewById(R.id.Gastmannschaft);
+            Endergebnis = itemView.findViewById(R.id.Spielergebnis);
+            LogoHeimmannschaft = itemView.findViewById(R.id.LogoHeimmannschaft);
+            LogoGastmannschaft = itemView.findViewById(R.id.LogoGastmannschaft);
+        }
+    }
+}
+
+
+
+/*
 public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.ExampleViewHolder>{
 
-    private ArrayList<beispielitemspielergebnis>BbeispielListe;
+    private Context context;
+    private List<beispielitemspielergebnis> ergebnisListe;
 
-    public static class ExampleViewHolder extends RecyclerView.ViewHolder {
+
+
+    public BeispielAdapter(Context context, List<beispielitemspielergebnis> ergebnisse){
+
+        this.context = context;
+        ergebnisListe = ergebnisse;
+    }
+
+
+    @NonNull
+    @Override
+    public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(context).inflate(R.layout.beispielitemspielergebnis, parent, false);
+        return new ExampleViewHolder(view);
+
+    }
+
+
+    //Werte an die Image/Textview weitergeben
+    @Override
+    public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
+
+
+        holder.Heimmannschaft.setText(beispielitemspielergebnis.getHeimmannschaft());
+        holder.Gastmannschaft.setText(beispielitemspielergebnis.getGastmannschaft());
+        holder.Endergebnis.setText(beispielitemspielergebnis.getEndergebnis());
+        Glide.with(context).load(beispielitemspielergebnis.getLogoHeim()).into(holder.LogoHeimmannschaft);
+        Glide.with(context).load(beispielitemspielergebnis.getLogoGast()).into(holder.LogoGastmannschaft);
+
+    }
+
+    public class ExampleViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView LogoHeimmannschaft;
         public ImageView LogoGastmannschaft;
@@ -34,47 +138,13 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
             Gastmannschaft = itemView.findViewById(R.id.Gastmannschaft);
             Endergebnis = itemView.findViewById(R.id.Spielergebnis);
 
-
         }
-    }
-
-
-
-    public BeispielAdapter(ArrayList<beispielitemspielergebnis>beispielListe) {
-    BbeispielListe = beispielListe;
-
-
-    }
-
-
-
-    //Layout der Cardview weitergeben
-    @NonNull
-    @Override
-    public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.beispielitemspielergebnis, parent, false);
-        ExampleViewHolder evh = new ExampleViewHolder(v);
-        return evh;
-    }
-
-
-    //Werte an die Image/Textview weitergeben
-    @Override
-    public void onBindViewHolder(ExampleViewHolder holder, int position) {
-    beispielitemspielergebnis currentItem = BbeispielListe.get(position);
-
-    holder.LogoHeimmannschaft.setImageResource(currentItem.getLogoHeimmannschaft());
-    holder.LogoGastmannschaft.setImageResource(currentItem.getLogoGastmannschaft());
-    holder.Heimmannschaft.setText(currentItem.getHeimmannschaft());
-    holder.Gastmannschaft.setText(currentItem.getGastmannschaft());
-    holder.Endergebnis.setText(currentItem.getEndergebnis());
-
     }
 
     @Override
     public int getItemCount() {
 
 
-        return BbeispielListe.size();
+        return ergebnisListe.size();
     }
-}
+}*/
