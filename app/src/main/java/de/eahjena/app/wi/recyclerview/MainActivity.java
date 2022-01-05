@@ -79,13 +79,30 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                        beispielitemspielergebnis beispielitemspielergebnis = new beispielitemspielergebnis(Heimmannschaft, Gastmannschaft, "2:2", LogoH, LogoG);
-                        ergebnisListe.add(beispielitemspielergebnis);
 
-                        System.out.println(Heimmannschaft);
-                        System.out.println(Gastmannschaft);
-                        System.out.println(LogoH);
-                        System.out.println(LogoG);
+                        JSONArray matchResults = FirstObject.getJSONArray("matchResults");
+
+                        for (int j = 0; j < matchResults.length(); j++) {
+
+
+                            JSONObject SecondObject = matchResults.getJSONObject(j);
+
+                            //If Clause, sodass nur das Endergebnis abgefragt wird, nicht das Zwischenergebnis
+                            if (SecondObject.getInt("resultTypeID") == 2){
+                                String ToreHeim = SecondObject.getString("pointsTeam1");
+                                String ToreGast = SecondObject.getString("pointsTeam2");
+                                String Endergebnis = ToreHeim + ":" + ToreGast;
+
+                                System.out.println(ToreHeim);
+                                System.out.println(ToreGast);
+                                System.out.println(Endergebnis);
+
+                                beispielitemspielergebnis beispielitemspielergebnis = new beispielitemspielergebnis(Heimmannschaft, Gastmannschaft, Endergebnis, LogoH, LogoG);
+                                ergebnisListe.add(beispielitemspielergebnis);
+
+                            }
+                        }
+
 
 
 
@@ -116,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         mRequestQueue.add(jsonArrayRequest);
 
     }
+
 }
 
 
