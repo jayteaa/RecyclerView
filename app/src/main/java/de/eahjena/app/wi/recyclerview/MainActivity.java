@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private List<beispielitemspielergebnis> ergebnisListe;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

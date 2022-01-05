@@ -64,6 +64,7 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
         public TextView Endergebnis;
         public ImageView LogoHeimmannschaft;
         public ImageView LogoGastmannschaft;
+        public TextView Spieltagsnummer;
 
 
 
@@ -76,6 +77,7 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
             Endergebnis = itemView.findViewById(R.id.Spielergebnis);
             LogoHeimmannschaft = itemView.findViewById(R.id.LogoHeimmannschaft);
             LogoGastmannschaft = itemView.findViewById(R.id.LogoGastmannschaft);
+            Spieltagsnummer = itemView.findViewById(R.id.SpieltagsNummer);
         }
     }
 }
