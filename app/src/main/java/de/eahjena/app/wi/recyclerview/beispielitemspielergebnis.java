@@ -9,6 +9,7 @@ public class beispielitemspielergebnis {
     private String LogoGast;
 
 
+
     public beispielitemspielergebnis(String Heimmannschaft , String Gastmannschaft , String Endergebnis , String LogoHeim, String LogoGast){
         this.Heimmannschaft = Heimmannschaft;
         this.Gastmannschaft = Gastmannschaft;

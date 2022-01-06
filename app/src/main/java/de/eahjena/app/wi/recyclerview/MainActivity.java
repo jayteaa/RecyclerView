@@ -1,6 +1,8 @@
 package de.eahjena.app.wi.recyclerview;
 
 import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private void parseJSON() {
 
 
-        String url = "https://api.openligadb.de/getmatchdata/bl1/2021/15";
+        String url = "https://api.openligadb.de/getmatchdata/bl1/2021/17";
 
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -65,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
 
                         JSONObject FirstObject = response.getJSONObject(i);
+
+                        JSONObject jsonObject1 = FirstObject.getJSONObject("group");
+                        String SpieltagsNummer = jsonObject1.getString("groupName");
+                        System.out.println(SpieltagsNummer);
+
+                        TextView Spieltagsnr = findViewById(R.id.SpieltagsNummer);
+                        Spieltagsnr.setText(SpieltagsNummer);  
 
                         //
                         JSONObject jsonObject2 = FirstObject.getJSONObject("team1");
