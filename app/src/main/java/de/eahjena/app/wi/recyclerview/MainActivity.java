@@ -45,13 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         ergebnisListe = new ArrayList<>();
 
-        parseJSON();
+        parseJSONErgebnisse();
+        parseJSONTabelle();
 
 
 
     }
 
-    private void parseJSON() {
+    private void parseJSONErgebnisse() {
 
 
         String url = "https://api.openligadb.de/getmatchdata/bl1/2021/17";
@@ -143,7 +144,77 @@ public class MainActivity extends AppCompatActivity {
         mRequestQueue.add(jsonArrayRequest);
 
     }
+    private void parseJSONTabelle() {
 
+
+        String Link = "https://api.openligadb.de/getbltable/bl1/2021";
+
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Link, null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+
+
+                        JSONObject Test = response.getJSONObject(i);
+
+                        String teamName = Test.getString("teamName");
+                        System.out.println(teamName);
+
+                        String teamIconUrl = Test.getString("teamIconUrl");
+                        System.out.println(teamIconUrl);
+
+                        String points = Test.getString("points");
+                        System.out.println(points);
+
+                        String opponentGoals = Test.getString("opponentGoals");
+                        System.out.println(opponentGoals);
+
+                        String goals = Test.getString("goals");
+                        System.out.println(goals);
+
+                        String matches = Test.getString("matches");
+                        System.out.println(matches);
+
+                        String won = Test.getString("won");
+                        System.out.println(won);
+
+                        String lost = Test.getString("lost");
+                        System.out.println(lost);
+
+                        String draw = Test.getString("draw");
+                        System.out.println(draw);
+
+                        String goalDiff = Test.getString("goalDiff");
+                        System.out.println(goalDiff);
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mRequestQueue.add(jsonArrayRequest);
+
+    }
 }
 
 
@@ -167,101 +238,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 
- /*       String url = "https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true";
 
-        JsonArrayRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++)
-
-                        try {
-
-                            JSONObject Objekt1 = response.getJSONObject(i);
-                            String MatchID = Objekt1.getString("matchID").toString();
-                            System.out.println(MatchID);
-
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mRequestQueue.add(request);
-    }
-}*/
-
-
-        //JSONObject Objekt1 = response.getJSONObject(i);
-        //String MatchID = Objekt1.getString("matchID").toString();
-        //                  System.out.println(MatchID);
-
-
-
-
-
-        /*String url = "https://api.openligadb.de/getmatchdata/bl1/2021/15";
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-
-                try {
-
-                    for (int i = 0; i < response.length(); i++) {
-
-
-                        JSONObject MatchObject = response.getJSONObject(i);
-                        JSONObject TeamObject = MatchObject.getJSONObject("team1");
-                        String team1Name = TeamObject.getString("teamName");
-
-                        JSONObject TeamObject2 = MatchObject.getJSONObject("team2");
-                        String team2Name = TeamObject2.getString("teamName");
-
-                        beispielListe.add(new beispielitemspielergebnis(R.drawable.fortuna_duesseldorf, R.drawable.fc_augsburg, team1Name, team2Name, "0-2"));
-                    }
-
-
-                    mExampleAdapter = new BeispielAdapter(this, beispielListe);
-                    mRecyclerView.setAdapter(mExampleAdapter);
-
-                    //String team1 = MatchObject.getString()
-                    //String team1 = MatchObject.getString()
-                    //String team1 = MatchObject.getString()
-                    //       int logoHeimmannschaft =
-                    //              int logoGastmannschaft
-                    //wir brauchen:
-                    // Name Heimmannschaft (team1, teamName),
-                    // Name Gastmannschaft (team 2, teamName),
-                    // Endergebnis (matchResults, pointsTeam1, pointsTeam2)
-                    // Logo Heimmannschaft (team1, teamIconUrl),
-                    // Logo Gastmannschaft (team 2, teamIconUrl),
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-
-
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-
-    }*/
