@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.eahjena.app.wi.recyclerview.MainActivity"
+    android:background="@android:color/darker_gray">
+
+    <TextView
+        android:id="@+id/SpieltagsNummer"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:layout_marginTop="50px"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:translationZ="90dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:layout_marginTop="250px"
+        android:id="@+id/recyclerViewSpielergebnisTest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"
+        android:padding="4dp"
+        android:scrollbars="vertical"        >
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

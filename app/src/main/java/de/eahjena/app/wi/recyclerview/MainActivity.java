@@ -1,6 +1,8 @@
 package de.eahjena.app.wi.recyclerview;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,11 +24,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView mRecyclerView;
     private RequestQueue mRequestQueue;
+
+    private RecyclerView tblRecyclerView;
+    private RequestQueue tblRequestQueue;
+
     private List<beispielitemspielergebnis> ergebnisListe;
+    private List<beispielitemtabelle> tabellenInhalteList;
+
 
 
 
@@ -36,19 +44,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button btnTabelle = findViewById(R.id.btn_tabelle);
+        Button btnErgebnisse = findViewById(R.id.btn_ergebnisse);
+        Button btnGps = findViewById(R.id.btn_gps);
 
-        mRecyclerView = findViewById(R.id.recyclerViewSpielergebnis);
+        btnTabelle.setOnClickListener(this);
+        btnErgebnisse.setOnClickListener(this);
+        btnGps.setOnClickListener(this);
+
+
+
+
+
+        /*super.onCreate(savedInstanceState);
+        setContentView(R.layout.recyclerviewspielergebnis);
+
+
+        mRecyclerView = findViewById(R.id.recyclerViewSpielergebnisTest);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
 
         ergebnisListe = new ArrayList<>();
+        tabellenInhalteList = new ArrayList<>();
 
         parseJSONErgebnisse();
-        parseJSONTabelle();
+        //parseJSONTabelle();
 
-
+   */
 
     }
 
@@ -192,13 +216,22 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println(goalDiff);
 
 
+                        //hier einfügen der ausgelesenen Strings in die Liste
+
+
+                        beispielitemtabelle beispielitemtabelle = new beispielitemtabelle (i +1 , teamIconUrl,teamName,matches,won,draw,lost,goals,goalDiff,points);
+                        tabellenInhalteList.add(beispielitemtabelle);
+
+
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
+                    BeispielAdapterTabelle adapter = new BeispielAdapterTabelle(MainActivity.this, tabellenInhalteList);
 
+                    tblRecyclerView.setAdapter(adapter);
 
 
                 }
@@ -212,7 +245,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mRequestQueue.add(jsonArrayRequest);
+        tblRequestQueue.add(jsonArrayRequest);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+            switch (v.getId()) {
+
+                case R.id.btn_tabelle:
+
+
+                    setContentView(R.layout.recyclerviewtabelle);
+
+
+                    tblRecyclerView = findViewById(R.id.recyclerViewTabelleTest);
+                    tblRecyclerView.setHasFixedSize(true);
+                    tblRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+                    tblRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
+
+                    ergebnisListe = new ArrayList<>();
+                    tabellenInhalteList = new ArrayList<>();
+
+                    parseJSONTabelle();
+
+                    break;
+
+                case R.id.btn_ergebnisse:
+
+
+                    setContentView(R.layout.recyclerviewspielergebnis);
+
+
+                    mRecyclerView = findViewById(R.id.recyclerViewSpielergebnisTest);
+                    mRecyclerView.setHasFixedSize(true);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+                    mRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
+
+                    ergebnisListe = new ArrayList<>();
+                    tabellenInhalteList = new ArrayList<>();
+
+                    parseJSONErgebnisse();
+
+                    break;
+
+
+            }
 
     }
 }

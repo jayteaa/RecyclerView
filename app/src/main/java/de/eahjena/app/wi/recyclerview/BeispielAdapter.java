@@ -24,6 +24,7 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
     private Context context;
     private List<beispielitemspielergebnis> ergebnisListe;
 
+
     public BeispielAdapter(Context context , List<beispielitemspielergebnis> ergebnisse){
 
         this.context = context;

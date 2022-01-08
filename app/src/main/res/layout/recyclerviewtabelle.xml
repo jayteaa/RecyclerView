@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.eahjena.app.wi.recyclerview.MainActivity"
+    android:background="@android:color/darker_gray">
+
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp">
+
+            <TextView
+                android:id="@+id/Platz"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:textSize="6pt"
+                android:text="Pl."/>
+
+
+
+            <ImageView
+                android:id="@+id/LogoPlatzfüller"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/Platz" />
+
+            <TextView
+                android:id="@+id/Mannschaftsname"
+                android:layout_width="170dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@id/LogoPlatzfüller"
+                android:textSize="6pt"
+                android:gravity="center"
+                android:text="Team"/>
+
+
+            <TextView
+                android:id="@+id/SpielAnzahl"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/Mannschaftsname"
+                android:paddingLeft="5dp"
+                android:textSize="6pt"
+                android:gravity="center"
+                android:text="Sp"/>
+
+            <TextView
+                android:id="@+id/SiegAnzahl"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/SpielAnzahl"
+                android:paddingLeft="5dp"
+                android:textSize="6pt"
+                android:gravity="center"
+                android:text="S"/>
+
+            <TextView
+                android:id="@+id/UnentschiedenAnzahl"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/SiegAnzahl"
+                android:paddingLeft="5dp"
+                android:textSize="6pt"
+                android:gravity="center"
+                android:text="U"/>
+
+            <TextView
+                android:id="@+id/NiederlagenAnzahl"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/UnentschiedenAnzahl"
+                android:paddingLeft="5dp"
+                android:textSize="6pt"
+                android:gravity="center"
+                android:text="N"/>
+
+
+
+            <TextView
+                android:id="@+id/TorDifferenz"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/NiederlagenAnzahl"
+                android:paddingLeft="5dp"
+                android:textSize="6pt"
+                android:gravity="center"
+                android:text="Diff"/>
+
+            <TextView
+                android:id="@+id/Punkte"
+                android:layout_width="40dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/TorDifferenz"
+                android:paddingLeft="5dp"
+                android:textSize="6pt"
+                android:gravity="center"
+                android:text="Pkt"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:layout_marginTop="30dp"
+        android:id="@+id/recyclerViewTabelleTest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"
+        android:padding="4dp"
+        android:scrollbars="vertical"        >
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
