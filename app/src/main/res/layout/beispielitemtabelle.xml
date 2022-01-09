@@ -84,8 +84,10 @@
             android:textSize="6pt"
             android:gravity="center"/>
 
+
+
         <TextView
-            android:id="@+id/GesamtTore"
+            android:id="@+id/TorDifferenz"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentTop="true"
@@ -96,25 +98,15 @@
             android:gravity="center"/>
 
         <TextView
-            android:id="@+id/TorDifferenz"
-            android:layout_width="40dp"
-            android:layout_height="25dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/GesamtTore"
-            android:paddingLeft="5dp"
-            android:textSize="6pt"
-            android:gravity="center"/>
-
-        <TextView
             android:id="@+id/Punkte"
-            android:layout_width="40dp"
+            android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/TorDifferenz"
             android:paddingLeft="5dp"
             android:textSize="6pt"
+            android:textStyle="bold"
             android:gravity="center"/>
 
 

@@ -51,7 +51,7 @@ public class BeispielAdapterTabelle extends RecyclerView.Adapter<BeispielAdapter
         holder.SiegAnzahl.setText(beispielitemtabelle.getSiegAnzahl());
         holder.UnentschiedenAnzahl.setText(beispielitemtabelle.getUnentschiedenAnzahl());
         holder.NiederlagenAnzahl.setText(beispielitemtabelle.getNiederlagenAnzahl());
-        holder.TorAnzahl.setText(beispielitemtabelle.getTorAnzahl());
+        //holder.TorAnzahl.setText(beispielitemtabelle.getTorAnzahl());
         holder.TorDifferenz.setText(beispielitemtabelle.getTorDifferenz());
         holder.Punkte.setText(beispielitemtabelle.getPunkte());
 
@@ -93,7 +93,7 @@ public class BeispielAdapterTabelle extends RecyclerView.Adapter<BeispielAdapter
             SiegAnzahl = itemView.findViewById(R.id.SiegAnzahl);
             UnentschiedenAnzahl = itemView.findViewById(R.id.UnentschiedenAnzahl);
             NiederlagenAnzahl = itemView.findViewById(R.id.NiederlagenAnzahl);
-            TorAnzahl = itemView.findViewById(R.id.GesamtTore);
+            //TorAnzahl = itemView.findViewById(R.id.GesamtTore);
             TorDifferenz = itemView.findViewById(R.id.TorDifferenz);
             Punkte = itemView.findViewById(R.id.Punkte);
 
