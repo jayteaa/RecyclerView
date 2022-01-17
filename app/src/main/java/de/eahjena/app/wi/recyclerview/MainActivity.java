@@ -1,5 +1,7 @@
 package de.eahjena.app.wi.recyclerview;
 
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setTitle("Fußball App");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkred)));
+
         Button btnTabelle = findViewById(R.id.btn_tabelle);
         Button btnErgebnisse = findViewById(R.id.btn_ergebnisse);
         Button btnGps = findViewById(R.id.btn_gps);
@@ -53,33 +58,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnGps.setOnClickListener(this);
 
 
-
-
-
-        /*super.onCreate(savedInstanceState);
-        setContentView(R.layout.recyclerviewspielergebnis);
-
-
-        mRecyclerView = findViewById(R.id.recyclerViewSpielergebnisTest);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
-
-        ergebnisListe = new ArrayList<>();
-        tabellenInhalteList = new ArrayList<>();
-
-        parseJSONErgebnisse();
-        //parseJSONTabelle();
-
-   */
-
     }
 
     private void parseJSONErgebnisse() {
 
 
-        String url = "https://api.openligadb.de/getmatchdata/bl1/2021/17";
+        String url = "https://api.openligadb.de/getmatchdata/bl1";
 
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -257,44 +241,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.btn_tabelle:
 
 
-                    setContentView(R.layout.recyclerviewtabelle);
-
-
-                    tblRecyclerView = findViewById(R.id.recyclerViewTabelleTest);
-                    tblRecyclerView.setHasFixedSize(true);
-                    tblRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-                    tblRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
-
-                    ergebnisListe = new ArrayList<>();
-                    tabellenInhalteList = new ArrayList<>();
-
-                    parseJSONTabelle();
+                    openTabelleActivity();
 
                     break;
 
                 case R.id.btn_ergebnisse:
 
 
-                    setContentView(R.layout.recyclerviewspielergebnis);
+                    openErgebnisActivity();
+
+                    break;
+
+                case R.id.btn_gps:
 
 
-                    mRecyclerView = findViewById(R.id.recyclerViewSpielergebnisTest);
-                    mRecyclerView.setHasFixedSize(true);
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-                    mRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
-
-                    ergebnisListe = new ArrayList<>();
-                    tabellenInhalteList = new ArrayList<>();
-
-                    parseJSONErgebnisse();
+                    openGpsActivity();
 
                     break;
 
 
             }
 
+    }
+
+    public void openTabelleActivity(){
+
+        Intent intent = new Intent(this, TabelleActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void openErgebnisActivity(){
+
+        Intent intent = new Intent (this, ErgebnisActivity.class);
+        startActivity(intent);
+    }
+
+    public void openGpsActivity(){
+
+        Intent intent = new Intent (this, GpsActivity.class);
+        startActivity(intent);
     }
 }
 

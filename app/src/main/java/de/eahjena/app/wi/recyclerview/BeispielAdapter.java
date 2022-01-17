@@ -19,7 +19,7 @@ import java.util.List;
 
 
 
-public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.ExampleViewHolder> {
+public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.ExampleViewHolder>  {
 
     private Context context;
     private List<beispielitemspielergebnis> ergebnisListe;
@@ -48,12 +48,26 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
         Glide.with(context).load(beispielitemspielergebnis.getLogoHeim()).into(holder.LogoHeimmannschaft);
         Glide.with(context).load(beispielitemspielergebnis.getLogoGast()).into(holder.LogoGastmannschaft);
 
+
+      holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (context, ErgebnisDetailActivity.class);
+
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return ergebnisListe.size();
     }
+
 
 
 
@@ -66,6 +80,7 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
         public ImageView LogoHeimmannschaft;
         public ImageView LogoGastmannschaft;
         public TextView Spieltagsnummer;
+        ConstraintLayout constraintLayout;
 
 
 
@@ -79,6 +94,7 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
             LogoHeimmannschaft = itemView.findViewById(R.id.LogoHeimmannschaft);
             LogoGastmannschaft = itemView.findViewById(R.id.LogoGastmannschaft);
             Spieltagsnummer = itemView.findViewById(R.id.SpieltagsNummer);
+            constraintLayout = itemView.findViewById(R.id.ergebnisDetailErg);
         }
     }
 }

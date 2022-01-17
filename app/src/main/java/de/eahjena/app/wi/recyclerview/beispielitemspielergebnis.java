@@ -5,6 +5,7 @@ public class beispielitemspielergebnis {
     private String Heimmannschaft;
     private String Gastmannschaft;
     private String Endergebnis;
+    private String Zwischenergebnis;
     private String LogoHeim;
     private String LogoGast;
 
@@ -14,6 +15,7 @@ public class beispielitemspielergebnis {
         this.Heimmannschaft = Heimmannschaft;
         this.Gastmannschaft = Gastmannschaft;
         this.Endergebnis = Endergebnis;
+        this.Zwischenergebnis = Zwischenergebnis;
         this.LogoHeim = LogoHeim;
         this.LogoGast = LogoGast;
     }
@@ -28,6 +30,10 @@ public class beispielitemspielergebnis {
 
     public String getEndergebnis() {
         return Endergebnis;
+    }
+
+    public String getZwischenergebnis() {
+        return Zwischenergebnis;
     }
 
     public String getLogoHeim() {
