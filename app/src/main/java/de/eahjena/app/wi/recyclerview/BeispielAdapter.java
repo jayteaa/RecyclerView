@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,10 +26,14 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
     private List<beispielitemspielergebnis> ergebnisListe;
 
 
+
+
+
     public BeispielAdapter(Context context , List<beispielitemspielergebnis> ergebnisse){
 
         this.context = context;
         ergebnisListe = ergebnisse;
+
     }
 
     @NonNull
@@ -49,17 +54,36 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
         Glide.with(context).load(beispielitemspielergebnis.getLogoGast()).into(holder.LogoGastmannschaft);
 
 
-      holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+      holder.RelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (context, ErgebnisDetailActivity.class);
 
                 Bundle bundle = new Bundle();
+
+                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoHeim());
+                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoGast());
+                bundle.putString("pointsTeam1", beispielitemspielergebnis.getEndergebnis());
+                bundle.putString("pointsTeam2", beispielitemspielergebnis.getZwischenergebnis());
+                bundle.putString("matchDateTime", beispielitemspielergebnis.getLogoGast());
+                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoGast());
+                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoGast());
+
+
+
+
+
+
+
+
+
                 intent.putExtras(bundle);
 
                 context.startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -81,6 +105,7 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
         public ImageView LogoGastmannschaft;
         public TextView Spieltagsnummer;
         ConstraintLayout constraintLayout;
+        RelativeLayout RelativeLayout;
 
 
 
@@ -94,7 +119,8 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
             LogoHeimmannschaft = itemView.findViewById(R.id.LogoHeimmannschaft);
             LogoGastmannschaft = itemView.findViewById(R.id.LogoGastmannschaft);
             Spieltagsnummer = itemView.findViewById(R.id.SpieltagsNummer);
-            constraintLayout = itemView.findViewById(R.id.ergebnisDetailErg);
+            RelativeLayout = itemView.findViewById(R.id.Teest);
+
         }
     }
 }

@@ -2,6 +2,7 @@ package de.eahjena.app.wi.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,12 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ergebnisdetail);
+
+        getSupportActionBar().setTitle("Ergebnis im Detail");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkred)));
+
+
+
 
 
         ImageView LogoHeimmannschaftErg = findViewById(R.id.LogoHeimmannschaftErg);
@@ -29,23 +36,35 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         String HeimLogoErg = bundle.getString("teamIconUrl");
-        /*String GastLogoErg = bundle.getString("teamIconUrl");
+        System.out.println("HeimLogoErg" + HeimLogoErg);
 
-        String EndergebnisEr = bundle.getString("overview");
-        String ZwischenergebnisEr = bundle.getString("overview");
-        String SpielstartEr = bundle.getString("overview");
-        String StadionEr = bundle.getString("overview");
-        String ZuschauerEr = bundle.getString("overview");
-*/
+        String GastLogoErg = bundle.getString("teamIconUrl");
+        System.out.println("GastLogoErg" + GastLogoErg);
+
+        String EndergebnisEr = bundle.getString("pointsTeam1");
+        System.out.println("EndergebnisEr" + EndergebnisEr);
+
+        String ZwischenergebnisEr = bundle.getString("pointsTeam2");
+        System.out.println("ZwischenergebnisEr" + ZwischenergebnisEr);
+
+        String SpielstartEr = bundle.getString("matchDateTime");
+        System.out.println("SpielstartEr" + SpielstartEr);
+
+        String StadionEr = bundle.getString("location");
+        System.out.println("StadionEr" + StadionEr);
+
+        String ZuschauerEr = bundle.getString("numberOfViewers");
+        System.out.println("ZuschauerEr" + ZuschauerEr);
+
 
 
         Glide.with(this).load(HeimLogoErg).into(LogoHeimmannschaftErg);
-        /*Glide.with(this).load(GastLogoErg).into(LogoGastmannschaftErg);
+        Glide.with(this).load(GastLogoErg).into(LogoGastmannschaftErg);
         EndergebnisErg.setText(EndergebnisEr);
         ZwischenergebnisErg.setText(ZwischenergebnisEr);
         SpielstartErg.setText(SpielstartEr);
         StadionErg.setText(StadionEr);
-        ZuschauerErg.setText(ZuschauerEr);*/
+        ZuschauerErg.setText(ZuschauerEr);
 
     }
 }

@@ -39,6 +39,9 @@
         <activity
             android:name=".GpsActivity"
             android:parentActivityName=".MainActivity"></activity>
+
+        <activity android:name=".ErgebnisDetailActivity"
+            android:parentActivityName=".ErgebnisActivity"/>
     </application>
 
 </manifest>
