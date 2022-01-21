@@ -18,8 +18,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+
+
 
 public class ErgebnisActivity extends AppCompatActivity{
 
@@ -29,6 +39,9 @@ public class ErgebnisActivity extends AppCompatActivity{
     private List<ItemSpielergebnis> ergebnisListe;
     private List<ItemDetail> detailListe;
     private List<ItemTabelle> tabellenInhalteList;
+
+    String Endergebnis;
+    String SpielstartRichtig;
 
 
 
@@ -75,7 +88,22 @@ public class ErgebnisActivity extends AppCompatActivity{
                         JSONObject FirstObject = response.getJSONObject(i);
 
                         String Spielstart = FirstObject.getString("matchDateTime");
-                        System.out.println(Spielstart);
+
+
+                        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'hh:mm:ss");
+
+                        try {
+
+                            Date d = sdf.parse(Spielstart);
+                        //Wandelt das Datum um in normales Format TT.MM.JJJJ SS.mm -> aufpassen mit m und M - Monate und Minuten
+                        sdf.applyPattern("dd.MM.yyyy  HH:mm");
+                        SpielstartRichtig = sdf.format(d);
+
+                        }
+
+                        catch (Exception e) {
+
+                        }
 
                         String Stadion = FirstObject.getString("location");
                         System.out.println(Stadion);
@@ -112,30 +140,40 @@ public class ErgebnisActivity extends AppCompatActivity{
 
                             JSONObject SecondObject = matchResults.getJSONObject(j);
 
-                            //If Clause, sodass nur das Endergebnis abgefragt wird, nicht das Zwischenergebnis
-                            if (SecondObject.getInt("resultTypeID") == 2){
-                                String ToreHeim = SecondObject.getString("pointsTeam1");
-                                String ToreGast = SecondObject.getString("pointsTeam2");
-                                String Endergebnis = ToreHeim + ":" + ToreGast;
+                            if (SecondObject.getInt("resultTypeID") == 2) {
 
-                                System.out.println(ToreHeim);
-                                System.out.println(ToreGast);
-                                System.out.println(Endergebnis);
+                                String ToreHeimEnd = SecondObject.getString("pointsTeam1");
+                                String ToreGastEnd = SecondObject.getString("pointsTeam2");
+                                Endergebnis = ToreHeimEnd + ":" + ToreGastEnd;
 
-                                ItemSpielergebnis ItemSpielergebnis = new ItemSpielergebnis(Heimmannschaft, Gastmannschaft, Endergebnis, "",
-                                                                            Stadion ,Zuschauer, Spielstart, LogoH, LogoG);
 
-                                ergebnisListe.add(ItemSpielergebnis);
+
+                            }
+
+                                else if (SecondObject.getInt("resultTypeID") == 1 ){
+
+
+                                    String ToreHeimZwischen = SecondObject.getString("pointsTeam1");
+                                    String ToreGastZwischen = SecondObject.getString("pointsTeam2");
+                                    String Zwischenergebnis = "(" + ToreHeimZwischen + ":" + ToreGastZwischen + ")";
+
+
+
+                                    System.out.println(Zwischenergebnis);
+
+
+
+                                    ItemSpielergebnis ItemSpielergebnis = new ItemSpielergebnis(Heimmannschaft, Gastmannschaft, Endergebnis, Zwischenergebnis,
+                                            Stadion, Zuschauer, SpielstartRichtig, LogoH, LogoG);
+
+                                    ergebnisListe.add(ItemSpielergebnis);
+                                }
 
                             }
 
 
 
 
-
-
-
-                        }
 
 
 

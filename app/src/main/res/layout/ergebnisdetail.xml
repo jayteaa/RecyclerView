@@ -55,8 +55,8 @@
         android:layout_height="25dp"
         android:layout_centerVertical="false"
         android:layout_marginTop="100dp"
+        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/LogoGastmannschaftErg"
-        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toEndOf="@+id/LogoHeimmannschaftErg"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +88,7 @@
     <TextView
         android:id="@+id/SpielstartErg"
         android:layout_width="358dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="Spielstart"
@@ -99,9 +99,9 @@
     <TextView
         android:id="@+id/StadionErg"
         android:layout_width="358dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Stadionbezeichnung"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,9 +110,9 @@
     <TextView
         android:id="@+id/ZuschauerErg"
         android:layout_width="358dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Zuschaueranzahl"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"

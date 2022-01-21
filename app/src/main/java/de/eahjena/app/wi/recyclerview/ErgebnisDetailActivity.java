@@ -81,10 +81,13 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
 
         Glide.with(this).load(HeimLogoErg).into(LogoHeimmannschaftErg);
         Glide.with(this).load(GastLogoErg).into(LogoGastmannschaftErg);
+
         HeimmannschaftErg.setText(HeimMannschaft);
         GastmannschaftErg.setText(GastMannschaft);
+
         EndergebnisErg.setText(EndergebnisEr);
         ZwischenergebnisErg.setText(ZwischenergebnisEr);
+
         SpielstartErg.setText(SpielstartEr);
         StadionErg.setText(StadionEr);
         ZuschauerErg.setText(ZuschauerEr);
@@ -95,163 +98,5 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
     }
 
 
-    /*private void parseJSONDetails() {
 
-
-        String url = "https://api.openligadb.de/getmatchdata/bl1/2021/19";
-
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-
-
-
-                        JSONObject FirstObject = response.getJSONObject(i);
-
-                        String Spielstart = FirstObject.getString("matchDateTime");
-                        System.out.print(Spielstart);
-
-                        String Stadion = FirstObject.getString("location");
-
-                        if (Stadion == null){
-
-                            Stadion = "keine Angabe zum Stadion";
-                        }
-
-                        System.out.println(Stadion);
-
-                        String Zuschauer = FirstObject.getString("location");
-
-                        if (Zuschauer == null){
-
-                             Zuschauer = "keine Angabe zu Zuschauern";
-                        }
-                        System.out.println(Zuschauer);
-
-
-
-                        //
-                        JSONObject jsonObject2 = FirstObject.getJSONObject("team1");
-                        String Heimmannschaft = jsonObject2.getString("teamName");
-                        String LogoHeim = jsonObject2.getString("teamIconUrl");
-                        System.out.println(LogoHeim);
-
-
-
-                        //
-                        JSONObject jsonObject3 = FirstObject.getJSONObject("team2");
-                        String Gastmannschaft = jsonObject3.getString("teamName");
-                        String LogoGast = jsonObject3.getString("teamIconUrl");
-                        System.out.println(LogoGast);
-
-
-
-
-                        JSONArray matchResults = FirstObject.getJSONArray("matchResults");
-
-                        for (int j = 0; j < matchResults.length(); j++) {
-
-
-                            JSONObject SecondObject = matchResults.getJSONObject(j);
-
-
-                            //If Clause, sodass nur das Endergebnis abgefragt wird, nicht das Zwischenergebnis
-
-
-                                if (SecondObject.getInt("resultTypeID") == 1) {
-
-
-                                    String ToreHeimZw = SecondObject.getString("pointsTeam1");
-                                    String ToreGastZw = SecondObject.getString("pointsTeam2");
-                                    String Zwischenergebnis = ToreHeimZw + ":" + ToreGastZw;
-
-
-                                    System.out.println(Zwischenergebnis);
-
-                                    ItemSpielergebnis ItemSpielergebnis = new ItemSpielergebnis(Heimmannschaft , Gastmannschaft , "", Zwischenergebnis, Stadion, Zuschauer, Spielstart,
-                                            LogoHeim,  LogoGast);
-
-                                    beispielListe.add(ItemSpielergebnis);
-
-
-
-                                }
-
-
-                            }
-
-
-
-                        for (int k = 0; k < matchResults.length(); k++) {
-
-
-                            JSONObject SecondObject = matchResults.getJSONObject(k);
-
-
-                            //If Clause, sodass nur das Endergebnis abgefragt wird, nicht das Zwischenergebnis
-
-
-                            if (SecondObject.getInt("resultTypeID") == 2) {
-
-
-                                String ToreHeimZw = SecondObject.getString("pointsTeam1");
-                                String ToreGastZw = SecondObject.getString("pointsTeam2");
-                                String Endergebnis = ToreHeimZw + ":" + ToreGastZw;
-
-
-
-                                System.out.println(Endergebnis);
-
-                                ItemSpielergebnis ItemSpielergebnis = new ItemSpielergebnis(Heimmannschaft , Gastmannschaft , Endergebnis, "", Stadion, Zuschauer, Spielstart,
-                                        LogoHeim,  LogoGast);
-
-                                beispielListe.add(ItemSpielergebnis);
-
-                            }
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-
-
-
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mRequestQueue.add(jsonArrayRequest);
-
-    }
-*/
 }
