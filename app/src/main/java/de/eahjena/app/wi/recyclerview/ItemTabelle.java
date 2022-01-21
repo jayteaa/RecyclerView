@@ -1,6 +1,6 @@
 package de.eahjena.app.wi.recyclerview;
 
-public class beispielitemtabelle {
+public class ItemTabelle {
 
     private Integer Platzierung;
     private String TeamLogo;
@@ -15,8 +15,8 @@ public class beispielitemtabelle {
 
 
 
-    public beispielitemtabelle(Integer Platzierung , String TeamLogo, String Mannschaftsname , String SpielAnzahl , String SiegAnzahl, String UnentschiedenAnzahl,
-                               String NiederlagenAnzahl , String TorAnzahl , String TorDifferenz , String Punkte){
+    public ItemTabelle(Integer Platzierung , String TeamLogo, String Mannschaftsname , String SpielAnzahl , String SiegAnzahl, String UnentschiedenAnzahl,
+                       String NiederlagenAnzahl , String TorAnzahl , String TorDifferenz , String Punkte){
 
         this.Platzierung = Platzierung;
         this.TeamLogo = TeamLogo;

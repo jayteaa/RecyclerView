@@ -20,38 +20,42 @@ import java.util.List;
 
 
 
-public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.ExampleViewHolder>  {
+public class ErgebnisAdapter extends RecyclerView.Adapter<ErgebnisAdapter.ErgebnisViewHolder>  {
 
     private Context context;
-    private List<beispielitemspielergebnis> ergebnisListe;
+    private List<ItemSpielergebnis> ergebnisListe;
+    private List<ItemDetail> detailListe;
 
 
 
 
 
-    public BeispielAdapter(Context context , List<beispielitemspielergebnis> ergebnisse){
+    public ErgebnisAdapter(Context context , List<ItemSpielergebnis> ergebnisse, List<ItemDetail> details){
 
         this.context = context;
         ergebnisListe = ergebnisse;
+        detailListe = details;
 
     }
 
     @NonNull
     @Override
-    public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ErgebnisViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.beispielitemspielergebnis , parent , false);
-        return new ExampleViewHolder(view);
+        return new ErgebnisViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ErgebnisViewHolder holder, int position) {
 
-        beispielitemspielergebnis beispielitemspielergebnis = ergebnisListe.get(position);
-        holder.Heimmannschaft.setText(beispielitemspielergebnis.getHeimmannschaft());
-        holder.Gastmannschaft.setText(beispielitemspielergebnis.getGastmannschaft());
-        holder.Endergebnis.setText(beispielitemspielergebnis.getEndergebnis());
-        Glide.with(context).load(beispielitemspielergebnis.getLogoHeim()).into(holder.LogoHeimmannschaft);
-        Glide.with(context).load(beispielitemspielergebnis.getLogoGast()).into(holder.LogoGastmannschaft);
+        ItemSpielergebnis ItemSpielergebnis = ergebnisListe.get(position);
+
+
+        holder.Heimmannschaft.setText(ItemSpielergebnis.getHeimmannschaft());
+        holder.Gastmannschaft.setText(ItemSpielergebnis.getGastmannschaft());
+        holder.Endergebnis.setText(ItemSpielergebnis.getEndergebnis());
+        Glide.with(context).load(ItemSpielergebnis.getLogoHeim()).into(holder.LogoHeimmannschaft);
+        Glide.with(context).load(ItemSpielergebnis.getLogoGast()).into(holder.LogoGastmannschaft);
 
 
       holder.RelativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -61,13 +65,22 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
 
                 Bundle bundle = new Bundle();
 
-                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoHeim());
-                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoGast());
-                bundle.putString("pointsTeam1", beispielitemspielergebnis.getEndergebnis());
-                bundle.putString("pointsTeam2", beispielitemspielergebnis.getZwischenergebnis());
-                bundle.putString("matchDateTime", beispielitemspielergebnis.getLogoGast());
-                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoGast());
-                bundle.putString("teamIconUrl", beispielitemspielergebnis.getLogoGast());
+                bundle.putString("Heimmannschaft", ItemSpielergebnis.getHeimmannschaft());
+                bundle.putString("Gastmannschaft", ItemSpielergebnis.getGastmannschaft());
+
+                bundle.putString("LogoHeim", ItemSpielergebnis.getLogoHeim());
+                bundle.putString("LogoGast", ItemSpielergebnis.getLogoGast());
+
+                bundle.putString("Endergebnis", ItemSpielergebnis.getEndergebnis());
+                bundle.putString("Zwischenergebnis", ItemSpielergebnis.getZwischenergebnis());
+
+                bundle.putString("Spielstart", "Spielstart: " + ItemSpielergebnis.getSpielstart());
+                bundle.putString("Stadion", "Stadion: " + ItemSpielergebnis.getStadion());
+                bundle.putString("Zuschauer", "Zuschauer: " + ItemSpielergebnis.getZuschauer());
+
+
+
+
 
 
 
@@ -95,7 +108,7 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
 
 
 
-    public class ExampleViewHolder extends RecyclerView.ViewHolder{
+    public class ErgebnisViewHolder extends RecyclerView.ViewHolder{
 
 
         public TextView Heimmannschaft;
@@ -104,12 +117,12 @@ public class BeispielAdapter extends RecyclerView.Adapter<BeispielAdapter.Exampl
         public ImageView LogoHeimmannschaft;
         public ImageView LogoGastmannschaft;
         public TextView Spieltagsnummer;
-        ConstraintLayout constraintLayout;
+
         RelativeLayout RelativeLayout;
 
 
 
-        public ExampleViewHolder(@NonNull View itemView) {
+        public ErgebnisViewHolder(@NonNull View itemView) {
 
             super(itemView);
 

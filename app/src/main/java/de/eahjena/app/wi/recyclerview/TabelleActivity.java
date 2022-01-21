@@ -2,9 +2,6 @@ package de.eahjena.app.wi.recyclerview;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,8 +25,8 @@ public class TabelleActivity extends AppCompatActivity{
     private RecyclerView tblRecyclerView;
     private RequestQueue tblRequestQueue;
 
-    private List<beispielitemspielergebnis> ergebnisListe;
-    private List<beispielitemtabelle> tabellenInhalteList;
+    private List<ItemSpielergebnis> ergebnisListe;
+    private List<ItemTabelle> tabellenInhalteList;
 
 
 
@@ -110,8 +107,8 @@ public class TabelleActivity extends AppCompatActivity{
                         //hier einfügen der ausgelesenen Strings in die Liste
 
 
-                        beispielitemtabelle beispielitemtabelle = new beispielitemtabelle (i +1 , teamIconUrl,teamName,matches,won,draw,lost,goals,goalDiff,points);
-                        tabellenInhalteList.add(beispielitemtabelle);
+                        ItemTabelle ItemTabelle = new ItemTabelle(i +1 , teamIconUrl,teamName,matches,won,draw,lost,goals,goalDiff,points);
+                        tabellenInhalteList.add(ItemTabelle);
 
 
 
@@ -120,7 +117,7 @@ public class TabelleActivity extends AppCompatActivity{
                         e.printStackTrace();
                     }
 
-                    BeispielAdapterTabelle adapter = new BeispielAdapterTabelle(TabelleActivity.this, tabellenInhalteList);
+                    TabelleAdapter adapter = new TabelleAdapter(TabelleActivity.this, tabellenInhalteList);
 
                     tblRecyclerView.setAdapter(adapter);
 

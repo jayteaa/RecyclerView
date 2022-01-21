@@ -1,23 +1,32 @@
 package de.eahjena.app.wi.recyclerview;
 
-public class beispielitemspielergebnis {
+public class ItemSpielergebnis {
 
     private String Heimmannschaft;
     private String Gastmannschaft;
     private String Endergebnis;
     private String Zwischenergebnis;
+    private String Stadion;
+    private String Zuschauer;
+    private String Spielstart;
     private String LogoHeim;
     private String LogoGast;
 
 
 
-    public beispielitemspielergebnis(String Heimmannschaft , String Gastmannschaft , String Endergebnis , String LogoHeim, String LogoGast){
+    public ItemSpielergebnis(String Heimmannschaft , String Gastmannschaft , String Endergebnis, String Zwischenergebnis, String Stadion, String Zuschauer, String Spielstart,
+                             String LogoHeim, String LogoGast){
+
+
         this.Heimmannschaft = Heimmannschaft;
         this.Gastmannschaft = Gastmannschaft;
         this.Endergebnis = Endergebnis;
-        this.Zwischenergebnis = Zwischenergebnis;
         this.LogoHeim = LogoHeim;
         this.LogoGast = LogoGast;
+        this.Zwischenergebnis = Zwischenergebnis;
+        this.Stadion = Stadion;
+        this.Zuschauer = Zuschauer;
+        this.Spielstart = Spielstart;
     }
 
     public String getHeimmannschaft() {
@@ -32,10 +41,6 @@ public class beispielitemspielergebnis {
         return Endergebnis;
     }
 
-    public String getZwischenergebnis() {
-        return Zwischenergebnis;
-    }
-
     public String getLogoHeim() {
         return LogoHeim;
     }
@@ -43,6 +48,23 @@ public class beispielitemspielergebnis {
     public String getLogoGast() {
         return LogoGast;
     }
+
+    public String getZwischenergebnis() {
+        return Zwischenergebnis;
+    }
+
+    public String getSpielstart() {
+        return Spielstart;
+    }
+
+    public String getStadion() {
+        return Stadion;
+    }
+
+    public String getZuschauer() {
+        return Zuschauer;
+    }
+
 }
 
 

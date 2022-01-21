@@ -38,8 +38,13 @@
         android:id="@+id/EndergebnisErg"
         android:layout_width="60dp"
         android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="false"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="64dp"
+        android:text="Test123"
+        android:textSize="9pt"
+        android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/LogoGastmannschaftErg"
         app:layout_constraintStart_toEndOf="@+id/LogoHeimmannschaftErg"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +61,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <TextView
+        android:id="@+id/HeimmannschaftErg"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Heimteam"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LogoHeimmannschaftErg" />
+
+    <TextView
+        android:id="@+id/GastmannschaftErg"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Gastteam"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LogoGastmannschaftErg" />
 
     <TextView
         android:id="@+id/SpielstartErg"
@@ -66,7 +94,7 @@
         android:text="Spielstart"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogoHeimmannschaftErg" />
+        app:layout_constraintTop_toBottomOf="@+id/HeimmannschaftErg" />
 
     <TextView
         android:id="@+id/StadionErg"

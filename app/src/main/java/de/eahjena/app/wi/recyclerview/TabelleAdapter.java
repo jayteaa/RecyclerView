@@ -15,14 +15,14 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 
-public class BeispielAdapterTabelle extends RecyclerView.Adapter<BeispielAdapterTabelle.ExampleViewHolder> {
+public class TabelleAdapter extends RecyclerView.Adapter<TabelleAdapter.TabelleViewHolder> {
 
 
     private Context context;
-    private List<beispielitemtabelle> tabellenInhalteList;
+    private List<ItemTabelle> tabellenInhalteList;
 
 
-    public BeispielAdapterTabelle(Context context , List<beispielitemtabelle> tblInhalteListe){
+    public TabelleAdapter(Context context , List<ItemTabelle> tblInhalteListe){
 
         this.context = context;
         tabellenInhalteList = tblInhalteListe;
@@ -32,28 +32,28 @@ public class BeispielAdapterTabelle extends RecyclerView.Adapter<BeispielAdapter
 
     @NonNull
     @Override
-    public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TabelleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.beispielitemtabelle , parent , false);
-        return new ExampleViewHolder(view);
+        return new TabelleViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TabelleViewHolder holder, int position) {
 
 
 
 
-        beispielitemtabelle beispielitemtabelle = tabellenInhalteList.get(position);
-        holder.Platzierung.setText(beispielitemtabelle.getPlatzierung().toString());
-        Glide.with(context).load(beispielitemtabelle.getTeamLogo()).into(holder.TeamLogo);
-        holder.Mannschaftsname.setText(beispielitemtabelle.getMannschaftsname());
-        holder.SpielAnzahl.setText(beispielitemtabelle.getSpielAnzahl());
-        holder.SiegAnzahl.setText(beispielitemtabelle.getSiegAnzahl());
-        holder.UnentschiedenAnzahl.setText(beispielitemtabelle.getUnentschiedenAnzahl());
-        holder.NiederlagenAnzahl.setText(beispielitemtabelle.getNiederlagenAnzahl());
-        //holder.TorAnzahl.setText(beispielitemtabelle.getTorAnzahl());
-        holder.TorDifferenz.setText(beispielitemtabelle.getTorDifferenz());
-        holder.Punkte.setText(beispielitemtabelle.getPunkte());
+        ItemTabelle ItemTabelle = tabellenInhalteList.get(position);
+        holder.Platzierung.setText(ItemTabelle.getPlatzierung().toString());
+        Glide.with(context).load(ItemTabelle.getTeamLogo()).into(holder.TeamLogo);
+        holder.Mannschaftsname.setText(ItemTabelle.getMannschaftsname());
+        holder.SpielAnzahl.setText(ItemTabelle.getSpielAnzahl());
+        holder.SiegAnzahl.setText(ItemTabelle.getSiegAnzahl());
+        holder.UnentschiedenAnzahl.setText(ItemTabelle.getUnentschiedenAnzahl());
+        holder.NiederlagenAnzahl.setText(ItemTabelle.getNiederlagenAnzahl());
+        //holder.TorAnzahl.setText(ItemTabelle.getTorAnzahl());
+        holder.TorDifferenz.setText(ItemTabelle.getTorDifferenz());
+        holder.Punkte.setText(ItemTabelle.getPunkte());
 
 
     }
@@ -65,7 +65,7 @@ public class BeispielAdapterTabelle extends RecyclerView.Adapter<BeispielAdapter
 
 
 
-    public class ExampleViewHolder extends RecyclerView.ViewHolder{
+    public class TabelleViewHolder extends RecyclerView.ViewHolder{
 
 
 
@@ -82,7 +82,7 @@ public class BeispielAdapterTabelle extends RecyclerView.Adapter<BeispielAdapter
 
 
 
-        public ExampleViewHolder(@NonNull View itemView) {
+        public TabelleViewHolder(@NonNull View itemView) {
 
             super(itemView);
 

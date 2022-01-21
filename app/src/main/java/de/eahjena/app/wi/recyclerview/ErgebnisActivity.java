@@ -2,8 +2,6 @@ package de.eahjena.app.wi.recyclerview;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,8 +26,9 @@ public class ErgebnisActivity extends AppCompatActivity{
     private RecyclerView mRecyclerView;
     private RequestQueue mRequestQueue;
 
-    private List<beispielitemspielergebnis> ergebnisListe;
-    private List<beispielitemtabelle> tabellenInhalteList;
+    private List<ItemSpielergebnis> ergebnisListe;
+    private List<ItemDetail> detailListe;
+    private List<ItemTabelle> tabellenInhalteList;
 
 
 
@@ -51,6 +50,7 @@ public class ErgebnisActivity extends AppCompatActivity{
 
         ergebnisListe = new ArrayList<>();
         tabellenInhalteList = new ArrayList<>();
+        detailListe = new ArrayList<>();
 
         parseJSONErgebnisse();
 
@@ -60,7 +60,7 @@ public class ErgebnisActivity extends AppCompatActivity{
     private void parseJSONErgebnisse() {
 
 
-        String url = "https://api.openligadb.de/getmatchdata/bl1";
+        String url = "https://api.openligadb.de/getmatchdata/bl1/2021/19";
 
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -73,6 +73,15 @@ public class ErgebnisActivity extends AppCompatActivity{
 
 
                         JSONObject FirstObject = response.getJSONObject(i);
+
+                        String Spielstart = FirstObject.getString("matchDateTime");
+                        System.out.println(Spielstart);
+
+                        String Stadion = FirstObject.getString("location");
+                        System.out.println(Stadion);
+
+                        String Zuschauer = FirstObject.getString("numberOfViewers");
+                        System.out.println(Zuschauer);
 
                         JSONObject jsonObject1 = FirstObject.getJSONObject("group");
                         String SpieltagsNummer = jsonObject1.getString("groupName");
@@ -113,10 +122,19 @@ public class ErgebnisActivity extends AppCompatActivity{
                                 System.out.println(ToreGast);
                                 System.out.println(Endergebnis);
 
-                                beispielitemspielergebnis beispielitemspielergebnis = new beispielitemspielergebnis(Heimmannschaft, Gastmannschaft, Endergebnis, LogoH, LogoG);
-                                ergebnisListe.add(beispielitemspielergebnis);
+                                ItemSpielergebnis ItemSpielergebnis = new ItemSpielergebnis(Heimmannschaft, Gastmannschaft, Endergebnis, "",
+                                                                            Stadion ,Zuschauer, Spielstart, LogoH, LogoG);
+
+                                ergebnisListe.add(ItemSpielergebnis);
 
                             }
+
+
+
+
+
+
+
                         }
 
 
@@ -130,7 +148,8 @@ public class ErgebnisActivity extends AppCompatActivity{
                     }
 
 
-                    BeispielAdapter adapter = new BeispielAdapter(ErgebnisActivity.this, ergebnisListe);
+                    ErgebnisAdapter adapter = new ErgebnisAdapter(ErgebnisActivity.this, ergebnisListe, detailListe);
+
 
                     mRecyclerView.setAdapter(adapter);
 
@@ -148,8 +167,12 @@ public class ErgebnisActivity extends AppCompatActivity{
 
         mRequestQueue.add(jsonArrayRequest);
 
-    }
 
+
+
+
+
+};
 
 }
 
