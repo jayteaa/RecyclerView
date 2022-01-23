@@ -77,10 +77,10 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         String HeimLogoErg = bundle.getString("LogoHeim");
-        System.out.println("HeimLogoErg" + HeimLogoErg);
+
 
         String GastLogoErg = bundle.getString("LogoGast");
-        System.out.println("GastLogoErg" + GastLogoErg);
+
 
         String HeimMannschaft = bundle.getString("Heimmannschaft");
 
@@ -88,19 +88,21 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
 
 
         String EndergebnisEr = bundle.getString("Endergebnis");
-        System.out.println("EndergebnisEr" + EndergebnisEr);
+
 
         String ZwischenergebnisEr = bundle.getString("Zwischenergebnis");
-        System.out.println("ZwischenergebnisEr" + ZwischenergebnisEr);
+
 
         String SpielstartEr = bundle.getString("Spielstart");
-        System.out.println("SpielstartEr" + SpielstartEr);
+
 
         String StadionEr = bundle.getString("Stadion");
-        System.out.println("StadionEr" + StadionEr);
+
 
         String ZuschauerEr = bundle.getString("Zuschauer");
-        System.out.println("ZuschauerEr" + ZuschauerEr);
+
+        String MatchID = bundle.getString("matchID");
+
 
 
 
@@ -119,14 +121,14 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
 
         //Erstellen des Recyclerviews
 
-        parseJSONSpielstand();
+        parseJSONSpielstand(MatchID);
 
 
     }
-    private void parseJSONSpielstand() {
+    private void parseJSONSpielstand(String MatchID) {
 
 
-        String Link = "https://api.openligadb.de/getmatchdata/bl1/2021/19";
+        String Link = "https://api.openligadb.de/getmatchdata/bl1";
 
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Link, null, new Response.Listener<JSONArray>() {
@@ -141,7 +143,7 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
 
 
-                    if (i == 0) {
+                    //if (i == 0) {
 
                         try {
 
@@ -151,27 +153,41 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
 
                             JSONArray Tore = FirstObject.getJSONArray("goals");
 
+                            String MatchID2 = FirstObject.getString("matchID");
 
                             for (int y = 0; y < Tore.length(); y++) {
 
+                                if (MatchID.equals(MatchID2)) {
 
-                                JSONObject TorObject = Tore.getJSONObject(y);
+                                    JSONObject TorObject = Tore.getJSONObject(y);
 
 
-                                TorMinute = TorObject.getString("matchMinute");
-                                Torschütze = TorObject.getString("goalGetterName");
-                                AnzahlToreHeim = TorObject.getString("scoreTeam1");
-                                AnzahlToreGast = TorObject.getString("scoreTeam2");
-                                aktuellerSpielstand = AnzahlToreHeim + ":" + AnzahlToreGast;
+                                    TorMinute = TorObject.getString("matchMinute");
+                                    Torschütze = TorObject.getString("goalGetterName");
+                                    AnzahlToreHeim = TorObject.getString("scoreTeam1");
+                                    AnzahlToreGast = TorObject.getString("scoreTeam2");
+                                    aktuellerSpielstand = AnzahlToreHeim + ":" + AnzahlToreGast;
 
-                                SpielstandDetail SpielstandDetail = new SpielstandDetail(TorMinute, aktuellerSpielstand, Torschütze);
-                                detailListe.add(SpielstandDetail);
 
-                                SpielstandAdapter adapter1 = new SpielstandAdapter(ErgebnisDetailActivity.this, detailListe);
+                                    SpielstandDetail SpielstandDetail = new SpielstandDetail(TorMinute, aktuellerSpielstand, Torschütze);
+                                    detailListe.add(SpielstandDetail);
 
-                                torRecyclerView.setAdapter(adapter1);
+                                    SpielstandAdapter adapter1 = new SpielstandAdapter(ErgebnisDetailActivity.this, detailListe);
+
+                                    torRecyclerView.setAdapter(adapter1);
+
+
+                                }
 
                             }
+
+
+
+
+
+
+
+
 
 
                         } catch (JSONException e) {
@@ -179,7 +195,9 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
                         }
 
 
-                    }
+
+
+
 
 
 

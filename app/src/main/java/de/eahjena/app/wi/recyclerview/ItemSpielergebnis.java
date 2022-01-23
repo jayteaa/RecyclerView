@@ -11,11 +11,12 @@ public class ItemSpielergebnis {
     private String Spielstart;
     private String LogoHeim;
     private String LogoGast;
+    private String matchID;
 
 
 
     public ItemSpielergebnis(String Heimmannschaft , String Gastmannschaft , String Endergebnis, String Zwischenergebnis, String Stadion, String Zuschauer, String Spielstart,
-                             String LogoHeim, String LogoGast){
+                             String LogoHeim, String LogoGast, String matchID){
 
 
         this.Heimmannschaft = Heimmannschaft;
@@ -27,6 +28,7 @@ public class ItemSpielergebnis {
         this.Stadion = Stadion;
         this.Zuschauer = Zuschauer;
         this.Spielstart = Spielstart;
+        this.matchID = matchID;
     }
 
     public String getHeimmannschaft() {
@@ -65,7 +67,11 @@ public class ItemSpielergebnis {
         return Zuschauer;
     }
 
-}
+    public String getMatchID() {return matchID;}
+
+    }
+
+
 
 
 

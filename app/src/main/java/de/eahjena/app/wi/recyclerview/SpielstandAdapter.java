@@ -49,9 +49,13 @@ public class SpielstandAdapter extends RecyclerView.Adapter<SpielstandAdapter.Sp
         SpielstandDetail SpielstandDetail = spielstandListe.get(position);
 
 
-        holder.Spielminute.setText(SpielstandDetail.getSpielminuteTor());
-        holder.Torschütze.setText(SpielstandDetail.getTorschütze());
-        holder.SpielstandUpdate.setText(SpielstandDetail.getSpielstandUpdate());
+        holder.Spielminute.setText(SpielstandDetail.getSpielminuteTor1());
+        holder.Torschütze.setText(SpielstandDetail.getTorschütze1());
+        holder.SpielstandUpdate.setText(SpielstandDetail.getSpielstandUpdate1());
+
+        //holder.Spielminute.setText(SpielstandDetail.getSpielminuteTor2());
+        //holder.Torschütze.setText(SpielstandDetail.getTorschütze2());
+        //holder.SpielstandUpdate.setText(SpielstandDetail.getSpielstandUpdate2());
 
 
 

@@ -45,6 +45,9 @@ public class ErgebnisActivity extends AppCompatActivity{
     String AnzahlToreHeim;
     String AnzahlToreGast;
     String aktuellerSpielstand;
+    String MatchID;
+    String LogoH;
+    String LogoG;
 
 
 
@@ -77,7 +80,7 @@ public class ErgebnisActivity extends AppCompatActivity{
     private void parseJSONErgebnisse() {
 
 
-        String url = "https://api.openligadb.de/getmatchdata/bl1/2021/19";
+        String url = "https://api.openligadb.de/getmatchdata/bl1";
 
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -94,6 +97,7 @@ public class ErgebnisActivity extends AppCompatActivity{
                         JSONObject FirstObject = response.getJSONObject(i);
 
                         String Spielstart = FirstObject.getString("matchDateTime");
+                        MatchID = FirstObject.getString("matchID");
 
 
                         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'hh:mm:ss");
@@ -126,14 +130,34 @@ public class ErgebnisActivity extends AppCompatActivity{
                         //Abfrage der Heimmannschaft
                         JSONObject jsonObject2 = FirstObject.getJSONObject("team1");
                         String Heimmannschaft = jsonObject2.getString("teamName");
-                        String LogoH = jsonObject2.getString("teamIconUrl");
 
+                        LogoH = jsonObject2.getString("teamIconUrl");
+
+
+
+                        String ProblemLinkUnion =  "https://upload.wikimedia.org/wikipedia/commons/4/44/1._FC_Union_Berlin_Logo.svg";
+                        String neuerLinkUnion = "https://de.wikipedia.org/wiki/1._FC_Union_Berlin#/media/Datei:1._FC_Union_Berlin_Logo.svg";
+
+
+
+
+
+
+
+
+                        //if (LogoG == ProblemLinkUnion)
+//
+                       // { LogoG = neuerLinkUnion;}
 
 
                         //Abfrage der Gastmannschaft
                         JSONObject jsonObject3 = FirstObject.getJSONObject("team2");
                         String Gastmannschaft = jsonObject3.getString("teamName");
-                        String LogoG = jsonObject3.getString("teamIconUrl");
+
+
+                        LogoG = jsonObject3.getString("teamIconUrl");
+
+
 
 
                         JSONArray Tore = FirstObject.getJSONArray("goals");
@@ -188,7 +212,7 @@ public class ErgebnisActivity extends AppCompatActivity{
 
 
                                     ItemSpielergebnis ItemSpielergebnis = new ItemSpielergebnis(Heimmannschaft, Gastmannschaft, Endergebnis, Zwischenergebnis,
-                                            Stadion, Zuschauer, SpielstartRichtig, LogoH, LogoG);
+                                            Stadion, Zuschauer, SpielstartRichtig, LogoH, LogoG, MatchID);
 
                                     ergebnisListe.add(ItemSpielergebnis);
 

@@ -17,15 +17,19 @@ public class SpielstandDetail {
         this.Torschütze = Torschütze;
 
 
+
+
     }
 
-    public String getSpielminuteTor() { return SpielminuteTor;    }
+    public String getSpielminuteTor1() { return SpielminuteTor;    }
 
-    public String getSpielstandUpdate() { return SpielstandUpdate;    }
+    public String getSpielstandUpdate1() { return SpielstandUpdate;    }
 
-    public String getTorschütze() {
+    public String getTorschütze1() {
         return Torschütze;
     }
+
+
 
 
 }

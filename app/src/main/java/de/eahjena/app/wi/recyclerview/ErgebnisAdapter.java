@@ -77,6 +77,8 @@ public class ErgebnisAdapter extends RecyclerView.Adapter<ErgebnisAdapter.Ergebn
                 bundle.putString("Stadion", "Stadion: " + ItemSpielergebnis.getStadion());
                 bundle.putString("Zuschauer", "Zuschauer: " + ItemSpielergebnis.getZuschauer());
 
+                bundle.putString("matchID", ItemSpielergebnis.getMatchID());
+
 
 
 
