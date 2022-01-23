@@ -21,10 +21,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ErgebnisDetailActivity extends AppCompatActivity {
+
+    private RequestQueue torRequestQueue;
+    private RecyclerView torRecyclerView;
+
+    private List<SpielstandDetail> detailListe;
+
+    String Endergebnis;
+    String SpielstartRichtig;
+    String TorMinute;
+    String Torschütze;
+    String AnzahlToreHeim;
+    String AnzahlToreGast;
+    String aktuellerSpielstand;
 
 
     @Override
@@ -34,6 +49,16 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Ergebnis im Detail");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkred)));
+
+        torRecyclerView = findViewById(R.id.recyclerViewTore);
+        torRecyclerView.setHasFixedSize(true);
+        torRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        torRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
+
+        detailListe = new ArrayList<>();
+
+        //Füllen der Image + Textviews
 
 
         ImageView LogoHeimmannschaftErg = findViewById(R.id.LogoHeimmannschaftErg);
@@ -92,11 +117,93 @@ public class ErgebnisDetailActivity extends AppCompatActivity {
         StadionErg.setText(StadionEr);
         ZuschauerErg.setText(ZuschauerEr);
 
+        //Erstellen des Recyclerviews
 
+        parseJSONSpielstand();
 
 
     }
+    private void parseJSONSpielstand() {
 
 
+        String Link = "https://api.openligadb.de/getmatchdata/bl1/2021/19";
+
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Link, null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //Abfrage des Spielstarts und Umwandlung in "richtiges" Format
+
+
+
+                for (int i = 0; i < response.length(); i++) {
+
+
+                    if (i == 0) {
+
+                        try {
+
+
+                            JSONObject FirstObject = response.getJSONObject(i);
+
+
+                            JSONArray Tore = FirstObject.getJSONArray("goals");
+
+
+                            for (int y = 0; y < Tore.length(); y++) {
+
+
+                                JSONObject TorObject = Tore.getJSONObject(y);
+
+
+                                TorMinute = TorObject.getString("matchMinute");
+                                Torschütze = TorObject.getString("goalGetterName");
+                                AnzahlToreHeim = TorObject.getString("scoreTeam1");
+                                AnzahlToreGast = TorObject.getString("scoreTeam2");
+                                aktuellerSpielstand = AnzahlToreHeim + ":" + AnzahlToreGast;
+
+                                SpielstandDetail SpielstandDetail = new SpielstandDetail(TorMinute, aktuellerSpielstand, Torschütze);
+                                detailListe.add(SpielstandDetail);
+
+                                SpielstandAdapter adapter1 = new SpielstandAdapter(ErgebnisDetailActivity.this, detailListe);
+
+                                torRecyclerView.setAdapter(adapter1);
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+
+
+
+
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        torRequestQueue.add(jsonArrayRequest);
+
+
+
+
+
+
+    };
 
 }

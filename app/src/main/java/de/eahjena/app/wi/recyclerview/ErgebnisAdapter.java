@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,17 +23,17 @@ public class ErgebnisAdapter extends RecyclerView.Adapter<ErgebnisAdapter.Ergebn
 
     private Context context;
     private List<ItemSpielergebnis> ergebnisListe;
-    private List<ItemDetail> detailListe;
 
 
 
 
 
-    public ErgebnisAdapter(Context context , List<ItemSpielergebnis> ergebnisse, List<ItemDetail> details){
+
+    public ErgebnisAdapter(Context context , List<ItemSpielergebnis> ergebnisse, List<SpielstandDetail> details){
 
         this.context = context;
         ergebnisListe = ergebnisse;
-        detailListe = details;
+
 
     }
 

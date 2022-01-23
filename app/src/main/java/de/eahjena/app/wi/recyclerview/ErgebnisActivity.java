@@ -18,17 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
-
 
 
 public class ErgebnisActivity extends AppCompatActivity{
@@ -36,12 +29,22 @@ public class ErgebnisActivity extends AppCompatActivity{
     private RecyclerView mRecyclerView;
     private RequestQueue mRequestQueue;
 
+
+    private RecyclerView torRecyclerView;
+
+
+
     private List<ItemSpielergebnis> ergebnisListe;
-    private List<ItemDetail> detailListe;
-    private List<ItemTabelle> tabellenInhalteList;
+    private List<SpielstandDetail> detailListe;
+
 
     String Endergebnis;
     String SpielstartRichtig;
+    String TorMinute;
+    String Torschütze;
+    String AnzahlToreHeim;
+    String AnzahlToreGast;
+    String aktuellerSpielstand;
 
 
 
@@ -61,8 +64,9 @@ public class ErgebnisActivity extends AppCompatActivity{
 
         mRequestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
 
+
+
         ergebnisListe = new ArrayList<>();
-        tabellenInhalteList = new ArrayList<>();
         detailListe = new ArrayList<>();
 
         parseJSONErgebnisse();
@@ -80,6 +84,8 @@ public class ErgebnisActivity extends AppCompatActivity{
 
             @Override
             public void onResponse(JSONArray response) {
+
+                //Abfrage des Spielstarts und Umwandlung in "richtiges" Format
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
@@ -105,40 +111,58 @@ public class ErgebnisActivity extends AppCompatActivity{
 
                         }
 
+                        //Abfrage des Stadionnamens
                         String Stadion = FirstObject.getString("location");
-                        System.out.println(Stadion);
 
+                        //Abfrage der Zuschaueranzahl
                         String Zuschauer = FirstObject.getString("numberOfViewers");
-                        System.out.println(Zuschauer);
 
+                        //Abfragen und einfügen der Spieltagsnummer in TextView
                         JSONObject jsonObject1 = FirstObject.getJSONObject("group");
                         String SpieltagsNummer = jsonObject1.getString("groupName");
-                        System.out.println(SpieltagsNummer);
-
                         TextView Spieltagsnr = findViewById(R.id.SpieltagsNummer);
                         Spieltagsnr.setText(SpieltagsNummer);  
 
-                        //
+                        //Abfrage der Heimmannschaft
                         JSONObject jsonObject2 = FirstObject.getJSONObject("team1");
                         String Heimmannschaft = jsonObject2.getString("teamName");
                         String LogoH = jsonObject2.getString("teamIconUrl");
 
 
 
-                        //
+                        //Abfrage der Gastmannschaft
                         JSONObject jsonObject3 = FirstObject.getJSONObject("team2");
                         String Gastmannschaft = jsonObject3.getString("teamName");
                         String LogoG = jsonObject3.getString("teamIconUrl");
 
 
+                        JSONArray Tore = FirstObject.getJSONArray("goals");
 
+                        for (int y = 0; y < Tore.length(); y++) {
+
+
+                            JSONObject TorObject = Tore.getJSONObject(y);
+
+                            TorMinute = TorObject.getString("matchMinute");
+                            Torschütze = TorObject.getString("goalGetterName");
+                            AnzahlToreHeim = TorObject.getString("scoreTeam1");
+                            AnzahlToreGast = TorObject.getString("scoreTeam2");
+                            aktuellerSpielstand = AnzahlToreHeim + ":" + AnzahlToreGast;
+
+                        }
+
+
+                        //JSON Array abrufen über For-Schleife
 
                         JSONArray matchResults = FirstObject.getJSONArray("matchResults");
 
                         for (int j = 0; j < matchResults.length(); j++) {
 
 
+                            //Abruf der Objekte innerhalb des Arrays
                             JSONObject SecondObject = matchResults.getJSONObject(j);
+
+                            //Kondition, um nicht zwei Werte für eine Variable zu generieren
 
                             if (SecondObject.getInt("resultTypeID") == 2) {
 
@@ -159,7 +183,7 @@ public class ErgebnisActivity extends AppCompatActivity{
 
 
 
-                                    System.out.println(Zwischenergebnis);
+
 
 
 
@@ -167,6 +191,10 @@ public class ErgebnisActivity extends AppCompatActivity{
                                             Stadion, Zuschauer, SpielstartRichtig, LogoH, LogoG);
 
                                     ergebnisListe.add(ItemSpielergebnis);
+
+
+
+
                                 }
 
                             }
@@ -192,6 +220,9 @@ public class ErgebnisActivity extends AppCompatActivity{
                     mRecyclerView.setAdapter(adapter);
 
 
+
+
+
                 }
 
 
@@ -204,6 +235,7 @@ public class ErgebnisActivity extends AppCompatActivity{
         });
 
         mRequestQueue.add(jsonArrayRequest);
+
 
 
 
